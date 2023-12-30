@@ -17,23 +17,23 @@ const Nav = styled.div`
 	transform: rotate(90deg) translateY(138px);
 `;
 
-const NavLink = styled.a`
-	color: #ffffff;
-	padding: 0.5rem;
-	margin: 0.5rem;
-`;
+const navLinkStyle = {
+	color: '#ffffff',
+	padding: '0.5rem',
+	margin: '0.5rem',
+};
 
 export default function Navbar() {
 	return (
 		<Nav>
 			<Link to='/'>
-				<NavLink>Welcome</NavLink>
+				Welcome
 			</Link>
 			<Link to='/about'>
-				<NavLink>About</NavLink>
+				About
 			</Link>
 			<Link to='/contact'>
-				<NavLink>Contact</NavLink>
+				Contact
 			</Link>
 		</Nav>
 	);

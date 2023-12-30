@@ -10,7 +10,7 @@ const WelcomeWrapper = styled.div`
 	grid-row: 1 / 6;
 	background-color: black;
 	width: 100% !important;
-	height: 100vh !important;
+	max-height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr 1fr [line3] 1fr [line4] 1fr 1fr;
 	grid-template-rows: [line1] 1fr [line2] 1fr [line3] 1fr [line4];
@@ -50,24 +50,16 @@ const WelcomeAnimation: React.FC = () => {
 	gsap.registerPlugin(SplitText, CustomEase, MotionPathPlugin, DrawSVGPlugin);
 
 	let paths: SVGPathElement[];
-	// const path = React.useRef<SVGPathElement>(null);
-	// let circleSVG: SVGSVGElement | null;
 	const circleSVG = React.useRef<SVGSVGElement>(null);
 
 	let svgContainerEl: HTMLDivElement | null;
-	// let welcomeEl: HTMLHeadingElement | null;
 	const welcomeEl = React.useRef<HTMLHeadingElement>(null);
 	const customEase = CustomEase.create('custom', 'M0,0 C0.15,0.366 0.314,0.57 0.5,0.671 0.659,0.757 0.834,0.807 1,1 ');
 	const main = React.useRef<HTMLDivElement>(null);
 	const mainTimeline = React.useRef<GSAPTimeline>(gsap.timeline());
 
 	React.useEffect(() => {
-		// paths = gsap.utils.toArray<SVGPathElement>('path');
-		console.log('paths: ', paths);
-
-		// circleSVG = document.querySelector<SVGSVGElement>('svg');
 		svgContainerEl = document.querySelector<HTMLDivElement>('#svg-container');
-		// welcomeEl = document.q/uerySelector<HTMLHeadingElement>('#welcome');
 	}, []);
 
 	// Create a namespace for the svg to allow browsers to handle svg properly
@@ -134,12 +126,6 @@ const WelcomeAnimation: React.FC = () => {
 		paths = gsap.utils.toArray<SVGPathElement>('path');
 
 		if (paths) {
-			console.log('paths: ', paths);
-		}
-
-		console.log('starting layout effect');
-		if (paths) {
-			console.log('made it past conditional');
 			// const winCenterX = window.innerWidth / 2;
 			// const winCenterY = window.innerHeight / 2;
 			// const welcomeContainerXY = getAbsoluteElementCoordinates(welcomeEl);
@@ -149,7 +135,6 @@ const WelcomeAnimation: React.FC = () => {
 			let ctx = gsap.context(() => {
 				let tl = gsap.timeline({ ease: customEase });
 
-				console.log(tl);
 				tl.set(circleSVG.current, { y: -600 });
 				tl.to(circleSVG.current, {
 					y: 100,
@@ -201,18 +186,18 @@ const WelcomeAnimation: React.FC = () => {
 	}, []);
 
 	return (
-			<WelcomeWrapper ref={main}>
-				<HeaderContainer id='header-container'>
-					<WelcomeH1 ref={welcomeEl} id='welcome'>
-						Welcome
-					</WelcomeH1>
-				</HeaderContainer>
-				<SVGContainer id='svg-container'>
-					<CircleSVG ref={circleSVG} id='svg' className='roll' xmlns='http://www.w3.org/2000/svg' width='400' height='120' viewBox='0 0 420 420'>
-						<path className='path' d='M60,110A47.109,47.109,0,1,0,10,60,47.109,47.109,0,0,0,60,110Z' fill='none' stroke='#fff' strokeMiterlimit='10' strokeWidth='4' />
-					</CircleSVG>
-				</SVGContainer>
-			</WelcomeWrapper>
+		<WelcomeWrapper ref={main} id='welcomeWrapper'>
+			<HeaderContainer id='header-container'>
+				<WelcomeH1 ref={welcomeEl} id='welcome'>
+					Welcome
+				</WelcomeH1>
+			</HeaderContainer>
+			<SVGContainer id='svg-container'>
+				<CircleSVG ref={circleSVG} id='svg' className='roll' xmlns='http://www.w3.org/2000/svg' width='400' height='120' viewBox='0 0 420 420'>
+					<path className='path' d='M60,110A47.109,47.109,0,1,0,10,60,47.109,47.109,0,0,0,60,110Z' fill='none' stroke='#fff' strokeMiterlimit='10' strokeWidth='4' />
+				</CircleSVG>
+			</SVGContainer>
+		</WelcomeWrapper>
 	);
 };
 
