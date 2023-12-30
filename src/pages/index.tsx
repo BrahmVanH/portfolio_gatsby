@@ -1,6 +1,8 @@
 import * as React from 'react';
 import type { HeadFC, PageProps } from 'gatsby';
-import WelcomeAnimation from '../WelcomeAnimation';
+import WelcomeAnimation from '../Components/WelcomeAnimation';
+import styled from 'styled-components';
+import Layout from '../layout';
 
 const pageStyles = {
 	color: '#232129',
@@ -131,9 +133,17 @@ const links = [
 	},
 ];
 
+const Main = styled.main`
+	grid-column: 1 / 3;
+	grid-row: 1 / 6;
+`;
+
 const IndexPage: React.FC<PageProps> = () => {
 	return (
+		<Layout>
+
 			<WelcomeAnimation />
+		</Layout>
 		// <main style={pageStyles}>
 		//   <h1 style={headingStyles}>
 		//     Congratulations

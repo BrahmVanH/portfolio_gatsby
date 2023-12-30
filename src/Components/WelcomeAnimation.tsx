@@ -3,6 +3,7 @@ import * as React from 'react';
 import gsap from 'gsap';
 import { MotionPathPlugin, DrawSVGPlugin, CustomEase, SplitText } from 'gsap/all';
 import styled from 'styled-components';
+import Layout from '../layout';
 
 const WelcomeWrapper = styled.div`
 	grid-column: 1 / 3;
@@ -45,24 +46,24 @@ const CircleSVG = styled.svg`
 	transform: translateY(-700px);
 `;
 
-export default function WelcomeAnimation() {
+const WelcomeAnimation: React.FC = () => {
 	gsap.registerPlugin(SplitText, CustomEase, MotionPathPlugin, DrawSVGPlugin);
 
 	let paths: SVGPathElement[];
-  const path = React.useRef<SVGPathElement>(null);
+	// const path = React.useRef<SVGPathElement>(null);
 	// let circleSVG: SVGSVGElement | null;
 	const circleSVG = React.useRef<SVGSVGElement>(null);
 
 	let svgContainerEl: HTMLDivElement | null;
 	// let welcomeEl: HTMLHeadingElement | null;
-  const welcomeEl = React.useRef<HTMLHeadingElement>(null);
+	const welcomeEl = React.useRef<HTMLHeadingElement>(null);
 	const customEase = CustomEase.create('custom', 'M0,0 C0.15,0.366 0.314,0.57 0.5,0.671 0.659,0.757 0.834,0.807 1,1 ');
 	const main = React.useRef<HTMLDivElement>(null);
 	const mainTimeline = React.useRef<GSAPTimeline>(gsap.timeline());
 
 	React.useEffect(() => {
-		// paths = gsap.utils.toArray<SVGPathElement>('.path');
-    console.log("paths: ", paths);
+		// paths = gsap.utils.toArray<SVGPathElement>('path');
+		console.log('paths: ', paths);
 
 		// circleSVG = document.querySelector<SVGSVGElement>('svg');
 		svgContainerEl = document.querySelector<HTMLDivElement>('#svg-container');
@@ -129,15 +130,16 @@ export default function WelcomeAnimation() {
 		return tl;
 	};
 
-	React.useEffect(() => {
-    if (path) {
-      console.log("path: ", path);
-      paths = gsap.utils.toArray<SVGPathElement>(path);
-    }
+	React.useLayoutEffect(() => {
+		paths = gsap.utils.toArray<SVGPathElement>('path');
 
-    console.log("starting layout effect");
 		if (paths) {
-      console.log("made it past conditional");
+			console.log('paths: ', paths);
+		}
+
+		console.log('starting layout effect');
+		if (paths) {
+			console.log('made it past conditional');
 			// const winCenterX = window.innerWidth / 2;
 			// const winCenterY = window.innerHeight / 2;
 			// const welcomeContainerXY = getAbsoluteElementCoordinates(welcomeEl);
@@ -194,20 +196,24 @@ export default function WelcomeAnimation() {
 
 			return () => ctx.revert();
 		} else {
-      console.log("paths null");
-    }
+			console.log('paths null');
+		}
 	}, []);
 
 	return (
-		<WelcomeWrapper ref={main}>
-			<HeaderContainer id='header-container'>
-				<WelcomeH1 ref={welcomeEl} id='welcome'>Welcome</WelcomeH1>
-			</HeaderContainer>
-			<SVGContainer id='svg-container'>
-				<CircleSVG ref={circleSVG} id='svg' className='roll' xmlns='http://www.w3.org/2000/svg' width='400' height='120' viewBox='0 0 420 420'>
-					<path ref={path} className='path' d='M60,110A47.109,47.109,0,1,0,10,60,47.109,47.109,0,0,0,60,110Z' fill='none' stroke='#fff' strokeMiterlimit='10' strokeWidth='4' />
-				</CircleSVG>
-			</SVGContainer>
-		</WelcomeWrapper>
+			<WelcomeWrapper ref={main}>
+				<HeaderContainer id='header-container'>
+					<WelcomeH1 ref={welcomeEl} id='welcome'>
+						Welcome
+					</WelcomeH1>
+				</HeaderContainer>
+				<SVGContainer id='svg-container'>
+					<CircleSVG ref={circleSVG} id='svg' className='roll' xmlns='http://www.w3.org/2000/svg' width='400' height='120' viewBox='0 0 420 420'>
+						<path className='path' d='M60,110A47.109,47.109,0,1,0,10,60,47.109,47.109,0,0,0,60,110Z' fill='none' stroke='#fff' strokeMiterlimit='10' strokeWidth='4' />
+					</CircleSVG>
+				</SVGContainer>
+			</WelcomeWrapper>
 	);
-}
+};
+
+export default WelcomeAnimation;
