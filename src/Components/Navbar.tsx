@@ -15,6 +15,10 @@ const Nav = styled.div`
 	align-items: center;
 	justify-content: space-around;
 	transform: rotate(90deg) translateY(138px);
+	position: fixed;
+	left: 0;
+	top: 50%;
+	z-index: 1000;
 `;
 
 const navLinkStyle = {
@@ -26,13 +30,13 @@ const navLinkStyle = {
 export default function Navbar() {
 	return (
 		<Nav>
-			<Link to='/'>
+			<Link style={navLinkStyle} to='/'>
 				Welcome
 			</Link>
-			<Link to='/about'>
+			<Link style={navLinkStyle} to='/about'>
 				About
 			</Link>
-			<Link to='/contact'>
+			<Link style={navLinkStyle} to='/contact'>
 				Contact
 			</Link>
 		</Nav>

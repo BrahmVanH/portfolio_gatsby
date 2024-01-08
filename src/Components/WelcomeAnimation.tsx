@@ -10,7 +10,7 @@ const WelcomeWrapper = styled.div`
 	grid-row: 1 / 6;
 	background-color: black;
 	width: 100% !important;
-	max-height: 100vh;
+	height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr 1fr [line3] 1fr [line4] 1fr 1fr;
 	grid-template-rows: [line1] 1fr [line2] 1fr [line3] 1fr [line4];
