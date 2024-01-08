@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.projectCard {
+	transition: transform 0.3s ease;
+	cursor: pointer;
+  scroll-snap-align: center;
+}
+.projectCard:hover {
+	transform: scale(1.5);
+}

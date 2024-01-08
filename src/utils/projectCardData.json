@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Weather Borealis",
+		"img": "../images/screenshots/aurora-borealis-screenshot.webp",
+		"description": "Weather app"
+	},
+	{
+		"name": "Captains Rentals",
+		"img": "../images/screenshots/captains_rentals-screenshot.webp",
+		"description": "Vacation Rentals"
+	},
+	{
+		"name": "Just Another Text Editor",
+		"img": "../images/screenshots/JATE-screenshot.jpg",
+		"description": "A basic text editor"
+	},
+	{
+		"name": "RecipeMe",
+		"img": "../images/screenshots/RecipeMe_screenshot.svg",
+		"description": "Recipe logging app."
+	}
+]
