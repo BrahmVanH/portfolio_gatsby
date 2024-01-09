@@ -5,8 +5,12 @@
 .projectCard {
 	transition: transform 0.3s ease;
 	cursor: pointer;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
 }
 .projectCard:hover {
-	transform: scale(1.5);
+	transform: scale(1.1);
+} 
+
+#projectScrollSection {
+
 }

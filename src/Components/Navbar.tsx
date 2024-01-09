@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { NavbarProps } from '../types';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const Nav = styled.div`
+const Nav = styled.nav`
 	grid-column: 1 / span 1;
 	grid-row: 3 / 4;
 	background-color: #1a2421;
@@ -46,7 +46,6 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 					start: '90% 85%',
 					scrub: 0.1,
 					toggleActions: 'play complete reverse reset',
-					markers: true,
 				},
 				x: -200,
 				duration: 3,

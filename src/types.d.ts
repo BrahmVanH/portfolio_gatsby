@@ -6,6 +6,7 @@ export interface ProjectCardProps {
 	name: string;
 	img: string;
 	description: string;
+	cardRef: React.Ref;
 }
 
 export interface NavbarProps {

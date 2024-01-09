@@ -12,15 +12,14 @@ const Card = styled.div`
 	background-color: black;
 `;
 const ProjectCard: React.FC<ProjectCardProps> = (props) => {
+	gsap.registerPlugin(ScrollTrigger);
+	// const cardRef = React.useRef<HTMLDivElement | null>(null);
 
-	const { name, img, description } = props;
-
-
-
+	const { name, img, description, cardRef } = props;
   
 	return (
-		<Card className='projectCard' >
-			<img width={'800px'} src={`${img}`} />
+		<Card ref={cardRef} className='projectCard' >
+			<img alt='slice of pizza' width={'800px'} src={`${img}`} />
 			<h1>{name}</h1>
 			<p>{description}</p>
 		</Card>

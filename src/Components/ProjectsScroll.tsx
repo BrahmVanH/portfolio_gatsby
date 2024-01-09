@@ -15,7 +15,8 @@ const Section = styled.section`
 	overflow-x: hidden;
 	height: 90vh;
 	padding: 0rem 20rem 0rem 10rem;
-	
+	scroll-snap-type: mandatory;
+	scroll-snap-type: x mandatory;
 	grid-row: 6 / 7;
 	grid-column: 1 / 3;
 `;
@@ -24,6 +25,7 @@ const ProjectsScroll: React.FC = () => {
 
 	const main = React.useRef<HTMLDivElement | null>(null);
 	const projectSection = React.useRef<HTMLElement | null>(null);
+	const cardRef = React.useRef<HTMLElement | null>(null);
 
 	React.useLayoutEffect(() => {
 		let cards = gsap.utils.toArray('.projectCard');
@@ -43,18 +45,6 @@ const ProjectsScroll: React.FC = () => {
 					anticipatePin: 1,
 				},
 			});
-			// gsap.to(cards, {
-			// 	xPercent: -50 * (cards.length - 1),
-			// 	ease: 'none',
-			// 	scrollTrigger: {
-			// 		trigger: '.projectCard',
-			// 		pin: true,
-			// 		scrub: 1,
-			// 		snap: 1 / (cards.length - 1),
-			// 		// base vertical scrolling on how wide the container is so it feels more natural.
-			// 		end: '+=400',
-			// 	},
-			// });
 		}, main);
 		return () => ctx.revert();
 	}, [main]);
@@ -63,7 +53,7 @@ const ProjectsScroll: React.FC = () => {
 		<div ref={main}>
 			<Section ref={projectSection} id='projectScrollSection'>
 				{projectCardData.map((card, index) => {
-					return <ProjectCard key={index} name={card.name} description={card.description} img={card.img} />;
+					return <ProjectCard cardRef={cardRef} key={index} name={card.name} description={card.description} img={card.img} />;
 				})}
 			</Section>
 		</div>

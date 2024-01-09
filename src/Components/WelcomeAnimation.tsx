@@ -17,8 +17,8 @@ const WelcomeWrapper = styled.div`
 `;
 
 const HeaderContainer = styled.div`
-	grid-column: 2 / 3;
-	grid-row: 3 / 4;
+	grid-column: 3 / 4;
+	grid-row: 2 / 3;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -29,10 +29,11 @@ const WelcomeH1 = styled.h1`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-size: 48px;
 `;
 const SVGContainer = styled.div`
-	grid-column: 2 / 3;
-	grid-row: 3 / 4;
+	grid-column: 3 / 4;
+	grid-row: 2 / 3;
 	display: flex;
 	justify-content: start;
 `;
@@ -43,7 +44,7 @@ const CircleSVG = styled.svg`
 	border-radius: 50%;
 	z-index: 1000;
 	overflow: visible;
-	transform: translateY(-700px);
+	/* transform: translateY(-700px); */
 `;
 
 const WelcomeAnimation: React.FC = () => {
@@ -134,7 +135,7 @@ const WelcomeAnimation: React.FC = () => {
 			const wTl = welcomeTl();
 			let ctx = gsap.context(() => {
 				let tl = gsap.timeline({ ease: customEase });
-
+				// Circle svg animation from up high through bounce and land
 				tl.set(circleSVG.current, { y: -600 });
 				tl.to(circleSVG.current, {
 					y: 100,
@@ -174,7 +175,7 @@ const WelcomeAnimation: React.FC = () => {
 				paths.forEach((obj, i) => {
 					tl.add(unrollTarget(obj));
 				});
-				mainTimeline.current.set(welcomeEl.current, { x: 240, y: -265 });
+				// mainTimeline.current.set(welcomeEl.current, { x: 240, y: -265 });
 				mainTimeline.current.add(tl, '+=0');
 				mainTimeline.current.add(wTl, '-=0.8');
 			}, main);
