@@ -38,7 +38,22 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 	const navbarRef = React.useRef<HTMLDivElement | null>(null);
 	React.useLayoutEffect(() => {
 		let ctx = gsap.context(() => {
-			gsap.fromTo(
+			let tl = gsap.timeline();
+
+			tl.to(navbarRef.current, {
+				scrollTrigger: {
+					trigger: triggerRef.current,
+					start: '90% 85%',
+					scrub: 0.1,
+					toggleActions: 'play complete reverse reset',
+					markers: true,
+				},
+				x: -200,
+				duration: 3,
+				opacity: 0,
+			});
+
+			tl.fromTo(
 				navbarRef.current,
 				{
 					x: -200,
@@ -50,27 +65,9 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 					duration: 2,
 				}
 			);
-			// gsap.to(navbarRef.current, {
-			// 	value: 100,
-			// 	ease: 'none',
-			// 	scrollTrigger: {
-			// 		trigger: parentRef.current,
-			// 		scrub: 1,
-			// 		start: "bottom center"
-			// 	},
-			// });
-			gsap.to(navbarRef.current, {
-				x: -200,
-				opacity: 0,
-				duration: 2,
-				scrollTrigger: {
-					trigger: triggerRef.current,
-					start: '10% 5%',
-					scrub: 0.1,
-					toggleActions: 'play none none reverse',
-				},
-			});
-		}, [parentRef]);
+		}, [triggerRef]);
+
+		return () => ctx.revert();
 	});
 	return (
 		<Nav ref={navbarRef}>

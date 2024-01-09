@@ -38,7 +38,7 @@ const ProjectsScroll: React.FC = () => {
 					end: () => innerWidth * 2,
 					scrub: true,
 					pin: true,
-					snap: 1/ (cards.length - 1),
+					snap: 1 / (cards.length - 1),
 					invalidateOnRefresh: true,
 					anticipatePin: 1,
 				},
