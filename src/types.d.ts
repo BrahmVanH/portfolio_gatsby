@@ -7,3 +7,8 @@ export interface ProjectCardProps {
 	img: string;
 	description: string;
 }
+
+export interface NavbarProps {
+	parentRef: React.Ref;
+	triggerRef: React.Ref;
+}

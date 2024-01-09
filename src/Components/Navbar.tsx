@@ -1,6 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
+import gsap from 'gsap';
+import { NavbarProps } from '../types';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const Nav = styled.div`
 	grid-column: 1 / span 1;
@@ -27,9 +30,50 @@ const navLinkStyle = {
 	margin: '0.5rem',
 };
 
-export default function Navbar() {
+const Navbar: React.FC<NavbarProps> = (props) => {
+	gsap.registerPlugin(ScrollTrigger);
+	const parentRef = props.parentRef;
+	const triggerRef = props.triggerRef;
+
+	const navbarRef = React.useRef<HTMLDivElement | null>(null);
+	React.useLayoutEffect(() => {
+		let ctx = gsap.context(() => {
+			gsap.fromTo(
+				navbarRef.current,
+				{
+					x: -200,
+					opacity: 0,
+				},
+				{
+					x: -150,
+					opacity: 1,
+					duration: 2,
+				}
+			);
+			// gsap.to(navbarRef.current, {
+			// 	value: 100,
+			// 	ease: 'none',
+			// 	scrollTrigger: {
+			// 		trigger: parentRef.current,
+			// 		scrub: 1,
+			// 		start: "bottom center"
+			// 	},
+			// });
+			gsap.to(navbarRef.current, {
+				x: -200,
+				opacity: 0,
+				duration: 2,
+				scrollTrigger: {
+					trigger: triggerRef.current,
+					start: '10% 5%',
+					scrub: 0.1,
+					toggleActions: 'play none none reverse',
+				},
+			});
+		}, [parentRef]);
+	});
 	return (
-		<Nav>
+		<Nav ref={navbarRef}>
 			<Link style={navLinkStyle} to='/'>
 				Welcome
 			</Link>
@@ -41,4 +85,6 @@ export default function Navbar() {
 			</Link>
 		</Nav>
 	);
-}
+};
+
+export default Navbar;
